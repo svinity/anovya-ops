@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anovya Operations v4.0</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Anovya Operations v8</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Anybody:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F8FAFC;--surface:#fff;--border:#E2E8F0;--text:#0F172A;--muted:#64748B;--light:#94A3B8;
@@ -222,6 +222,76 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
   .settings-wrap{padding:16px}
 }
 
+/* ── HOME PAGE (Stitch Design) ── */
+#home-panel{background:#F8FAFC;background-image:radial-gradient(#E2E8F0 1px,transparent 1px);background-size:20px 20px}
+
+/* Hero */
+.home-hero{position:relative;min-height:240px;display:flex;align-items:center;overflow:hidden;background:#fff}
+.home-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,245,230,.65),transparent 60%),radial-gradient(circle at bottom left,rgba(230,230,255,.45),transparent 60%);pointer-events:none}
+.home-hero-content{position:relative;z-index:2;padding:44px 40px 48px;max-width:960px;width:100%}
+.home-hero-label{font-size:9px;font-weight:700;letter-spacing:.22em;color:#825100;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.home-hero-label::after{content:'';flex:0 0 80px;height:0.5px;background:linear-gradient(90deg,#825100,transparent)}
+.home-hero-tagline{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;font-style:italic;color:#0b1c30;line-height:1.2;cursor:text;outline:none;min-width:200px;max-width:680px;display:block}
+.home-hero-tagline:focus{border-bottom:2px solid rgba(70,72,212,.35)}
+.home-hero-tagline:empty::before{content:attr(placeholder);color:#94A3B8}
+.home-hero-divider{height:0.5px;background:linear-gradient(90deg,transparent,#825100,transparent);margin:20px 0 0;max-width:440px}
+.home-hero-sub{font-size:11px;color:#94A3B8;margin-top:10px;letter-spacing:.04em}
+
+/* Body */
+.home-body{padding:28px 40px 100px}
+.home-sections-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px}
+
+/* Cards */
+.home-section{background:#fff;border-radius:16px;border:1px solid #E2E8F0;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);padding:22px 22px 16px;position:relative;transition:transform .2s,box-shadow .2s}
+.home-section:hover{transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(0,0,0,.1)}
+.home-section.accent-vision {border-left:4px solid #4648d4}
+.home-section.accent-mission{border-left:4px solid #006b5f}
+.home-section.accent-tasks  {border-left:4px solid #825100}
+.home-section.accent-default{border-left:4px solid #94A3B8}
+
+.home-section-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.home-section-icon-blob{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.accent-vision  .home-section-icon-blob{background:#EEEFFE}
+.accent-mission .home-section-icon-blob{background:#E5F4F2}
+.accent-tasks   .home-section-icon-blob{background:#F5EFE6}
+.accent-default .home-section-icon-blob{background:#F1F5F9}
+.home-section-meta{flex:1;min-width:0}
+.home-section-type{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px}
+.accent-vision  .home-section-type{color:#4648d4}
+.accent-mission .home-section-type{color:#006b5f}
+.accent-tasks   .home-section-type{color:#825100}
+.accent-default .home-section-type{color:#94A3B8}
+.home-section-heading{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:#0b1c30;background:none;border:none;outline:none;width:100%;cursor:text;padding:0;line-height:1.3}
+.home-section-heading:focus{border-bottom:1px dashed #E2E8F0}
+.home-section-del{background:none;border:none;color:#CBD5E1;cursor:pointer;font-size:15px;padding:2px 4px;border-radius:5px;transition:all .15s;flex-shrink:0;margin-top:2px}
+.home-section-del:hover{color:#EF4444;background:#FEE2E2}
+
+.home-entry{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid #F1F5F9}
+.home-entry:last-of-type{border-bottom:none}
+.home-entry-bullet{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:10px}
+.accent-vision  .home-entry-bullet{background:#4648d4}
+.accent-mission .home-entry-bullet{background:#006b5f}
+.accent-tasks   .home-entry-bullet{background:#825100}
+.accent-default .home-entry-bullet{background:#94A3B8}
+.home-entry-text{flex:1;font-size:13px;color:#334155;background:none;border:none;outline:none;resize:none;line-height:1.6;min-height:22px;font-family:'Inter',sans-serif;cursor:text}
+.home-entry-text:focus{color:#0b1c30}
+.home-entry-text::placeholder{color:#CBD5E1}
+.home-entry-date{font-size:10px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:99px;padding:3px 8px;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0;color:#64748B}
+.home-entry-date:focus{outline:none;border-color:#4648d4}
+.home-entry-del{background:none;border:none;color:#CBD5E1;cursor:pointer;font-size:12px;padding:3px;transition:color .15s;flex-shrink:0}
+.home-entry-del:hover{color:#EF4444}
+.home-add-entry-btn{margin-top:10px;background:none;border:1px dashed #E2E8F0;border-radius:8px;padding:7px 12px;font-size:11px;color:#94A3B8;cursor:pointer;width:100%;text-align:left;transition:all .15s;font-family:'Inter',sans-serif}
+.home-add-entry-btn:hover{border-color:#4648d4;color:#4648d4}
+.home-add-section-btn{background:none;border:1px dashed #CBD5E1;border-radius:12px;padding:13px 24px;font-size:12px;font-weight:600;color:#94A3B8;cursor:pointer;width:100%;transition:all .15s;font-family:'Inter',sans-serif}
+.home-add-section-btn:hover{border-color:#4648d4;color:#4648d4}
+@media(max-width:960px){.home-sections-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){
+  .home-hero-tagline{font-size:30px}
+  .home-hero-content{padding:28px 16px 32px}
+  .home-body{padding:20px 16px 100px}
+  .home-sections-grid{grid-template-columns:1fr}
+}
+
 /* ── DAILY WORK ── */
 #daily-panel{display:none;flex:1}
 #daily-panel.visible{display:block}
@@ -287,7 +357,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
     </div>
     <p class="login-error" id="login-err">Invalid username or password.</p>
     <button class="login-btn" id="login-btn" onclick="doLogin()">Sign In</button>
-    <p class="login-version">Anovya Operations · v4.0</p>
+    <p class="login-version">Anovya Operations · v8</p>
   </div>
 </div>
 
@@ -300,7 +370,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
       <div class="s-logo">A</div>
       <div>
         <div class="s-title">Anovya</div>
-        <div class="s-sub">Operations <span class="version-badge" style="padding:1px 6px;font-size:9px" id="version-lbl">v4.0</span></div>
+        <div class="s-sub">Operations <span class="version-badge" style="padding:1px 6px;font-size:9px" id="version-lbl">v8</span></div>
       </div>
       <button class="s-close" onclick="closeSidebar()">×</button>
     </div>
@@ -308,6 +378,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
     <nav class="sidebar-nav" id="sidebar-nav">
       <div class="nav-sect">
         <div class="nav-section-label nav-sect-lbl">Overview</div>
+        <div class="nav-item" id="nav-home" onclick="showHome()">
+          <div class="nav-dot" style="background:#f59e0b"></div>🏠 Home
+        </div>
         <div class="nav-item active" id="nav-all" onclick="setDivision('all')">
           <div class="nav-dot" style="background:#4f46e5"></div>All Tasks
           <span class="nav-count" id="count-all">0</span>
@@ -317,11 +390,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
         <div class="nav-sect-lbl">Divisions</div>
         <div id="divisions-nav"></div>
       </div>
-        <div class="nav-sect" style="margin-top:0;padding-top:0;border-top:none">
-          <div class="nav-item" id="nav-daily" onclick="showDailyWork()">
-            <div class="nav-dot" style="background:#10B981"></div>📋 Daily Work
-          </div>
-        </div>
       <div class="nav-sect" style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px">
         <div class="nav-item" id="nav-settings" onclick="showSettings()">
           <div class="nav-dot" style="background:#94A3B8"></div>⚙ Settings
@@ -395,7 +463,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
         <div class="settings-section">
           <h3>About</h3>
           <div class="settings-desc">Anovya Operations Dashboard version info.</div>
-          <span class="version-badge" id="settings-version-badge">v4.0</span>
+          <span class="version-badge" id="settings-version-badge">v8</span>
           <span style="font-size:12px;color:var(--muted);margin-left:10px">Anovya Lifestyle Operations</span>
         </div>
 
@@ -441,6 +509,27 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
           <a href="https://docs.google.com/spreadsheets/d/1xnnWRE0rIYy3W7B3PX2KX-8N0ceXTLNVDl90RBqnBgE" target="_blank" style="font-size:12px;color:#4f46e5;text-decoration:none;font-weight:600">↗ Open Google Sheet</a>
         </div>
       </div>
+    </main>
+
+    <!-- HOME PANEL -->
+    <main id="home-panel" style="display:none;flex:1;overflow-y:auto">
+
+      <!-- HERO BANNER -->
+      <div class="home-hero">
+        <div class="home-hero-content">
+          <div class="home-hero-label">ANOVYA · OPERATIONS</div>
+          <div class="home-hero-tagline" id="home-tagline" contenteditable="true" onblur="saveHomeTagline(this.innerText)" spellcheck="false" placeholder="Your vision statement…">Building something that matters.</div>
+          <div class="home-hero-divider"></div>
+          <div class="home-hero-sub">Click any text to edit · Changes save automatically</div>
+        </div>
+      </div>
+
+      <!-- SECTIONS GRID -->
+      <div class="home-body">
+        <div id="home-sections"></div>
+        <button class="home-add-section-btn" onclick="addHomeSection()">+ Add Section</button>
+      </div>
+
     </main>
 
     <!-- DAILY WORK PANEL -->
@@ -542,7 +631,7 @@ let currentDivision = 'all';
 let expandedSubs    = new Set();
 let openEdits       = new Set();
 let showSubAdder    = new Set();
-let appVersion      = 'v4.0';
+let appVersion      = 'v8';
 
 // ══════════════════════════════════════════
 // FIELD MAPPING
@@ -582,6 +671,7 @@ function showDashboard() {
   document.getElementById('user-avatar').textContent= (currentUser.display_name||currentUser.username)[0].toUpperCase();
   loadSettingsFromCache();
   loadTasks();
+  loadHomeData();
   buildSettingsUI();
 }
 
@@ -639,7 +729,7 @@ async function syncSettings() {
     if (data.settings) {
       const rows = data.settings;
       const newMembers=[];
-      let newApiKey='', newProvider='openai', newVersion='v4.0';
+      let newApiKey='', newProvider='openai', newVersion='v8';
       rows.forEach(r => {
         if (r.type==='member')                           newMembers.push({name:r.name});
         if (r.type==='config'&&r.name==='api_key')      newApiKey=r.value;
@@ -936,6 +1026,7 @@ function showTasksView() {
   document.getElementById('tasks-view').style.display='block';
   document.getElementById('settings-panel').style.display='none';
   document.getElementById('daily-panel').style.display='none';
+  document.getElementById('home-panel').style.display='none';
   document.getElementById('ai-bar').style.display='flex';
   document.querySelectorAll('.nav-item').forEach(el=>{if(el.id==='nav-settings')el.classList.remove('active');});
 }
@@ -943,10 +1034,144 @@ function showSettings() {
   document.getElementById('tasks-view').style.display='none';
   document.getElementById('settings-panel').style.display='block';
   document.getElementById('daily-panel').style.display='none';
+  document.getElementById('home-panel').style.display='none';
   document.getElementById('topbar-title').textContent='Settings';
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
   document.getElementById('nav-settings').classList.add('active');
   buildSettingsUI(); closeSidebar();
+}
+
+// ══════════════════════════════════════════
+// HOME PAGE
+// ══════════════════════════════════════════
+const HOME_KEY = 'anovya_home_v1';
+let homeData = { sections: [] };
+
+const SECTION_META = {
+  'VISION':  { accent: 'accent-vision',  icon: '✦', type: 'Vision'  },
+  'MISSION': { accent: 'accent-mission', icon: '🚀', type: 'Mission' },
+  'TASKS':   { accent: 'accent-tasks',   icon: '✓', type: 'Tasks'   },
+};
+function sectionMeta(heading) {
+  return SECTION_META[heading.toUpperCase()] || { accent: 'accent-default', icon: '◈', type: heading };
+}
+function loadHomeData() {
+  try {
+    const raw = localStorage.getItem(HOME_KEY);
+    if (raw) homeData = JSON.parse(raw);
+    if (!homeData.sections || !homeData.sections.length) {
+      homeData.sections = [
+        { id: 'vision',  heading: 'VISION',  entries: [{ text: '', date: today() }] },
+        { id: 'mission', heading: 'MISSION', entries: [{ text: '', date: today() }] },
+        { id: 'tasks',   heading: 'TASKS',   entries: [{ text: '', date: today() }] }
+      ];
+    }
+    if (!homeData.tagline) homeData.tagline = 'Building something that matters.';
+  } catch(e) { homeData = { sections: [], tagline: 'Building something that matters.' }; }
+}
+function saveHomeData() {
+  localStorage.setItem(HOME_KEY, JSON.stringify(homeData));
+}
+function saveHomeTagline(text) {
+  homeData.tagline = text.trim() || 'Building something that matters.';
+  saveHomeData();
+}
+function today() {
+  return new Date().toISOString().slice(0,10);
+}
+function showHome() {
+  document.getElementById('tasks-view').style.display='none';
+  document.getElementById('settings-panel').style.display='none';
+  document.getElementById('daily-panel').style.display='none';
+  document.getElementById('home-panel').style.display='flex';
+  document.getElementById('home-panel').style.flexDirection='column';
+  document.getElementById('topbar-title').textContent='Home';
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  document.getElementById('nav-home').classList.add('active');
+  renderHome(); closeSidebar();
+}
+function renderHome() {
+  // Set tagline
+  const tagEl = document.getElementById('home-tagline');
+  if (tagEl && !tagEl.matches(':focus')) tagEl.innerText = homeData.tagline || 'Building something that matters.';
+
+  const container = document.getElementById('home-sections');
+  const grid = document.createElement('div');
+  grid.className = 'home-sections-grid';
+
+  homeData.sections.forEach((sec, si) => {
+    const meta = sectionMeta(sec.heading);
+    const card = document.createElement('div');
+    card.className = `home-section ${meta.accent}`;
+    card.id = `hs-${si}`;
+    card.innerHTML = `
+      <div class="home-section-header">
+        <div class="home-section-icon-blob">${meta.icon}</div>
+        <div class="home-section-meta">
+          <div class="home-section-type">${escHtml(meta.type || sec.heading)}</div>
+          <input class="home-section-heading" value="${escHtml(sec.heading)}"
+            placeholder="Section title"
+            onblur="updateSectionHeading(${si}, this.value)"
+            onkeydown="if(event.key==='Enter')this.blur()">
+        </div>
+        <button class="home-section-del" onclick="deleteHomeSection(${si})" title="Remove">✕</button>
+      </div>
+      ${sec.entries.map((en, ei) => `
+        <div class="home-entry" id="he-${si}-${ei}">
+          <div class="home-entry-bullet"></div>
+          <textarea class="home-entry-text" rows="1"
+            placeholder="Write something here…"
+            oninput="autoResizeTA(this);updateEntry(${si},${ei},'text',this.value)"
+            onblur="saveHomeData()">${escHtml(en.text)}</textarea>
+          <input type="date" class="home-entry-date" value="${en.date}"
+            onchange="updateEntry(${si},${ei},'date',this.value)">
+          <button class="home-entry-del" onclick="deleteHomeEntry(${si},${ei})" title="Remove">✕</button>
+        </div>
+      `).join('')}
+      <button class="home-add-entry-btn" onclick="addHomeEntry(${si})">+ Add entry</button>
+    `;
+    grid.appendChild(card);
+  });
+
+  container.innerHTML = '';
+  container.appendChild(grid);
+  container.querySelectorAll('.home-entry-text').forEach(autoResizeTA);
+}
+function autoResizeTA(el) {
+  el.style.height='auto';
+  el.style.height=el.scrollHeight+'px';
+}
+function updateSectionHeading(si, val) {
+  homeData.sections[si].heading = val;
+  saveHomeData();
+}
+function updateEntry(si, ei, field, val) {
+  homeData.sections[si].entries[ei][field] = val;
+  saveHomeData();
+}
+function addHomeEntry(si) {
+  homeData.sections[si].entries.push({ text: '', date: today() });
+  saveHomeData(); renderHome();
+  // Focus the new textarea
+  const entries = document.querySelectorAll(`#hs-${si} .home-entry-text`);
+  if (entries.length) entries[entries.length-1].focus();
+}
+function deleteHomeEntry(si, ei) {
+  homeData.sections[si].entries.splice(ei, 1);
+  if (!homeData.sections[si].entries.length) homeData.sections[si].entries.push({ text: '', date: today() });
+  saveHomeData(); renderHome();
+}
+function addHomeSection() {
+  homeData.sections.push({ id: 'sec_'+Date.now(), heading: 'NEW SECTION', entries: [{ text: '', date: today() }] });
+  saveHomeData(); renderHome();
+  // Focus the new heading
+  const headings = document.querySelectorAll('.home-section-heading');
+  if (headings.length) { const h = headings[headings.length-1]; h.focus(); h.select(); }
+}
+function deleteHomeSection(si) {
+  if (!confirm('Remove this section?')) return;
+  homeData.sections.splice(si,1);
+  saveHomeData(); renderHome();
 }
 
 function openSidebar()  { document.getElementById('sidebar').classList.add('open'); document.getElementById('s-overlay').classList.add('visible'); }
@@ -1289,9 +1514,9 @@ function showDailyWork() {
   document.getElementById('tasks-view').style.display='none';
   document.getElementById('settings-panel').style.display='none';
   document.getElementById('daily-panel').style.display='block';
+  document.getElementById('home-panel').style.display='none';
   document.getElementById('topbar-title').textContent='Daily Work';
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
-  document.getElementById('nav-daily').classList.add('active');
   if(document.getElementById('add-btn')) document.getElementById('add-btn').style.display='none';
   closeSidebar();
   loadDailyLog();
