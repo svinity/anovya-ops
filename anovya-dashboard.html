@@ -242,38 +242,38 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .home-sections-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px}
 
 /* Cards */
-.home-section{background:#fff;border-radius:16px;border:1px solid #E2E8F0;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);padding:22px 22px 16px;position:relative;transition:transform .2s,box-shadow .2s}
+.home-section{background:#fff;border-radius:16px;border:1px solid #E2E8F0;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);padding:28px 26px 22px;position:relative;transition:transform .2s,box-shadow .2s}
 .home-section:hover{transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(0,0,0,.1)}
 .home-section.accent-vision {border-left:4px solid #4648d4}
 .home-section.accent-mission{border-left:4px solid #006b5f}
 .home-section.accent-tasks  {border-left:4px solid #825100}
 .home-section.accent-default{border-left:4px solid #94A3B8}
 
-.home-section-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
-.home-section-icon-blob{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.home-section-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.home-section-icon-blob{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .accent-vision  .home-section-icon-blob{background:#EEEFFE}
 .accent-mission .home-section-icon-blob{background:#E5F4F2}
 .accent-tasks   .home-section-icon-blob{background:#F5EFE6}
 .accent-default .home-section-icon-blob{background:#F1F5F9}
 .home-section-meta{flex:1;min-width:0}
-.home-section-type{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px}
+.home-section-type{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
 .accent-vision  .home-section-type{color:#4648d4}
 .accent-mission .home-section-type{color:#006b5f}
 .accent-tasks   .home-section-type{color:#825100}
 .accent-default .home-section-type{color:#94A3B8}
-.home-section-heading{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:#0b1c30;background:none;border:none;outline:none;width:100%;cursor:text;padding:0;line-height:1.3}
+.home-section-heading{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#0b1c30;background:none;border:none;outline:none;width:100%;cursor:text;padding:0;line-height:1.25}
 .home-section-heading:focus{border-bottom:1px dashed #E2E8F0}
 .home-section-del{background:none;border:none;color:#CBD5E1;cursor:pointer;font-size:15px;padding:2px 4px;border-radius:5px;transition:all .15s;flex-shrink:0;margin-top:2px}
 .home-section-del:hover{color:#EF4444;background:#FEE2E2}
 
-.home-entry{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid #F1F5F9}
+.home-entry{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #F1F5F9}
 .home-entry:last-of-type{border-bottom:none}
-.home-entry-bullet{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:10px}
+.home-entry-bullet{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:11px}
 .accent-vision  .home-entry-bullet{background:#4648d4}
 .accent-mission .home-entry-bullet{background:#006b5f}
 .accent-tasks   .home-entry-bullet{background:#825100}
 .accent-default .home-entry-bullet{background:#94A3B8}
-.home-entry-text{flex:1;font-size:13px;color:#334155;background:none;border:none;outline:none;resize:none;line-height:1.6;min-height:22px;font-family:'Inter',sans-serif;cursor:text}
+.home-entry-text{flex:1;font-size:28px;font-family:'Playfair Display',serif;font-weight:400;color:#334155;background:none;border:none;outline:none;resize:none;line-height:1.5;min-height:42px;cursor:text}
 .home-entry-text:focus{color:#0b1c30}
 .home-entry-text::placeholder{color:#CBD5E1}
 .home-entry-date{font-size:10px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:99px;padding:3px 8px;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0;color:#64748B}
@@ -1068,10 +1068,40 @@ function loadHomeData() {
     }
     if (!homeData.tagline) homeData.tagline = 'Building something that matters.';
   } catch(e) { homeData = { sections: [], tagline: 'Building something that matters.' }; }
+  // Pull latest from Sheets in background (overrides cache if newer)
+  fetchHomeDataFromSheet();
 }
+
+async function fetchHomeDataFromSheet() {
+  try {
+    const res  = await fetch(SCRIPT_URL + '?action=getHomeData', { credentials: 'omit' });
+    const data = await res.json();
+    if (data.homeData && data.homeData.sections && data.homeData.sections.length) {
+      homeData = data.homeData;
+      localStorage.setItem(HOME_KEY, JSON.stringify(homeData));
+      // Re-render if Home panel is currently visible
+      if (document.getElementById('home-panel').style.display !== 'none') renderHome();
+    }
+  } catch(e) {}
+}
+
+let _homeDebounce = null;
 function saveHomeData() {
   localStorage.setItem(HOME_KEY, JSON.stringify(homeData));
+  clearTimeout(_homeDebounce);
+  _homeDebounce = setTimeout(pushHomeDataToSheet, 1500);
 }
+
+async function pushHomeDataToSheet() {
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST', credentials: 'omit',
+      body: JSON.stringify({ action: 'saveHomeData', homeData })
+    });
+    setSyncStatus('synced');
+  } catch(e) { setSyncStatus('offline'); }
+}
+
 function saveHomeTagline(text) {
   homeData.tagline = text.trim() || 'Building something that matters.';
   saveHomeData();
